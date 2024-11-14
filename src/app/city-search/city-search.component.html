@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>City Search</h1>
+  <form [formGroup]="citySearchForm">
+    <mat-autocomplete #auto="matAutocomplete">
+      @for (city of cities; track city) {
+      <mat-option [value]="cities">{{ city }}</mat-option>
+      }
+    </mat-autocomplete>
+
+    <div><button mat-raised-button>Find Coordinates</button></div>
+
+    <div class="field">
+      <label class="label">Latitude</label>
+      <input type="text" formControlName="latitude" />
+    </div>
+    <div class="field">
+      <label class="label">Longitude</label>
+      <input type="text" formControlName="longitude" />
+    </div>
+  </form>
+</div>
