@@ -1,11 +1,22 @@
 <div class="container">
   <h1>City Search</h1>
   <form [formGroup]="citySearchForm">
-    <mat-autocomplete #auto="matAutocomplete">
-      @for (city of cities; track city) {
-      <mat-option [value]="cities">{{ city }}</mat-option>
-      }
-    </mat-autocomplete>
+    <mat-form-field>
+      <mat-label>City</mat-label>
+      <input
+        type="text"
+        placeholder="Brisbane"
+        aria-label="String"
+        matInput
+        formControlName="cityName"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (city of cities; track city) {
+        <mat-option [value]="city">{{ city }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
 
     <div><button mat-raised-button>Find Coordinates</button></div>
 
