@@ -12,13 +12,20 @@
         [matAutocomplete]="auto"
       />
       <mat-autocomplete #auto="matAutocomplete">
-        @for (city of cities; track city) {
+        @for (city of filteredCities | async; track city) {
         <mat-option [value]="city">{{ city }}</mat-option>
         }
       </mat-autocomplete>
     </mat-form-field>
 
-    <div><button mat-raised-button>Find Coordinates</button></div>
+    <div>
+      <button
+        mat-raised-button
+        (click)="findCoordinates(cityNameControl.value)"
+      >
+        Find Coordinates
+      </button>
+    </div>
 
     <div class="field">
       <label class="label">Latitude</label>

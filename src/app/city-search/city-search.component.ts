@@ -10,6 +10,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { map, Observable, startWith } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { Coordinates } from '../interfaces/coordinates';
+import { WeatherApiService } from '../weather-api.service';
 
 @Component({
   selector: 'app-city-search',
@@ -21,17 +24,19 @@ import { map, Observable, startWith } from 'rxjs';
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
+    AsyncPipe,
   ],
   templateUrl: './city-search.component.html',
   styleUrl: './city-search.component.scss',
 })
 export class CitySearchComponent implements OnInit {
+  constructor(private weatherApi: WeatherApiService) {}
   //Form controls
   public cityNameControl: FormControl = new FormControl('');
   public latitudeControl: FormControl = new FormControl('');
   public longitudeControl: FormControl = new FormControl('');
 
-  //Form group
+  //Form group --> passes in the controls above
   public citySearchForm: FormGroup = new FormGroup({
     cityName: this.cityNameControl,
     latitude: this.latitudeControl,
@@ -48,10 +53,22 @@ export class CitySearchComponent implements OnInit {
     );
   }
 
+  //filter the autocomplete dropdown field
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.cities.filter((city) =>
       city.toLowerCase().includes(filterValue)
     );
+  }
+
+  public findCoordinates(city: string): void {
+    this.weatherApi
+      .getLatitudeLongitude(city)
+      .subscribe((value) => this.setCoords(value));
+  }
+
+  private setCoords(coords: Coordinates): void {
+    this.latitudeControl.patchValue(coords.latitude);
+    this.longitudeControl.patchValue(coords.longitude);
   }
 }
