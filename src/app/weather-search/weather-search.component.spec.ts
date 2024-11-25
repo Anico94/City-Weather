@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CitySearchComponent } from './city-search.component';
+import { CitySearchComponent } from './weather-search.component';
 
 describe('CitySearchComponent', () => {
   let component: CitySearchComponent;
@@ -8,9 +8,8 @@ describe('CitySearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CitySearchComponent]
-    })
-    .compileComponents();
+      imports: [CitySearchComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CitySearchComponent);
     component = fixture.componentInstance;

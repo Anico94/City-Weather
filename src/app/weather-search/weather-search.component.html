@@ -1,8 +1,8 @@
-<div class="container">
-  <h1>City Search</h1>
-  <form [formGroup]="citySearchForm">
+<div class="search-container">
+  <h1 class="search-title">Weather Search</h1>
+  <form class="search-form" [formGroup]="citySearchForm">
     <mat-form-field>
-      <mat-label>City</mat-label>
+      <mat-label>Search for a city</mat-label>
       <input
         type="text"
         placeholder="Brisbane"
@@ -23,23 +23,8 @@
         mat-raised-button
         (click)="findCoordinates(cityNameControl.value)"
       >
-        Find Coordinates
+        Show Weather
       </button>
-    </div>
-
-    <div class="field">
-      <label class="label">Latitude</label>
-      <input type="text" formControlName="latitude" />
-    </div>
-    <div class="field">
-      <label class="label">Longitude</label>
-      <input type="text" formControlName="longitude" />
     </div>
   </form>
 </div>
-<app-weather-info
-  [city]="this.cityNameControl.value"
-  [currentTemperature]="100"
-  [description]="'It is hot'"
-  [currentTime]="'1:30pm'"
-></app-weather-info>
