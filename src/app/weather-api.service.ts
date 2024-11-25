@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Coordinates } from './interfaces/coordinates';
 import { map, Observable, of } from 'rxjs';
@@ -10,33 +10,53 @@ import { environment } from '../environments/environment.development';
 export class WeatherApiService {
   constructor(private http: HttpClient) {}
 
-  private baseUrl = 'http://api.openweathermap.org/';
+  private geoLocationUrl = 'http://api.openweathermap.org/geo/1.0/direct';
+  private currentWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
+  private forcastWeatherUrl = 'api.openweathermap.org/data/2.5/forecast';
   private apiKey = environment.openWeatherApiKey;
-  // private apiKey = '123';
 
-  public getLatitudeLongitude(city: string): Observable<Coordinates> {
-    return this.http
-      .get<any[]>(
-        this.constructUrl(
-          this.baseUrl,
-          'geo/1.0/direct?q=',
-          city,
-          ',&limit=1&appid=',
-          this.apiKey
-        )
-      )
-      .pipe(
-        map((data) => {
-          if (data) {
-            return { latitude: data[0].lat, longitude: data[0].lon };
-          }
-          throw new Error('No coordinates found for the specified city');
-        })
-      );
+  //TODO: look into HTTP params to construct the url --> cleaner code.
+
+  public getLatitudeLongitude(
+    city: string,
+    searchLimit: number = 1
+  ): Observable<Coordinates> {
+    const params = new HttpParams()
+      .set('q', city)
+      .set('limit', searchLimit)
+      .set('appid', this.apiKey);
+
+    return this.http.get<any[]>(this.geoLocationUrl, { params }).pipe(
+      map((data) => {
+        if (data) {
+          return { latitude: data[0].lat, longitude: data[0].lon };
+        }
+        throw new Error('No coordinates found for the specified city');
+      })
+    );
   }
 
-  private constructUrl(...strings: string[]): string {
-    const url = strings.join('');
-    return url;
+  public getCurrentWeather(
+    latitude: string,
+    longitude: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('lat', latitude)
+      .set('lon', longitude)
+      .set('appid', this.apiKey);
+
+    return this.http.get<any[]>(this.currentWeatherUrl, { params });
+  }
+
+  public getFiveDayForcast(
+    latitude: string,
+    longitude: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('lat', latitude)
+      .set('lon', longitude)
+      .set('appid', this.apiKey);
+
+    return this.http.get<any[]>(this.forcastWeatherUrl, { params });
   }
 }
