@@ -13,6 +13,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Coordinates } from '../interfaces/coordinates';
 import { WeatherApiService } from '../weather-api.service';
+import { WeatherInfoComponent } from '../weather-info/weather-info.component';
 
 @Component({
   selector: 'app-city-search',
@@ -25,6 +26,7 @@ import { WeatherApiService } from '../weather-api.service';
     MatInputModule,
     MatFormFieldModule,
     AsyncPipe,
+    WeatherInfoComponent,
   ],
   templateUrl: './city-search.component.html',
   styleUrl: './city-search.component.scss',
