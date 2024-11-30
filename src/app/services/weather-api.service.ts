@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Coordinates } from './interfaces/coordinates';
-import { map, Observable, of } from 'rxjs';
-import { environment } from '../environments/environment.development';
+import { Coordinates } from '../interfaces/coordinates';
+import { map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -10,12 +10,13 @@ import { environment } from '../environments/environment.development';
 export class WeatherApiService {
   constructor(private http: HttpClient) {}
 
-  private geoLocationUrl = 'http://api.openweathermap.org/geo/1.0/direct';
+  private geoLocationUrl = 'https://api.openweathermap.org/geo/1.0/direct';
   private currentWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
-  private forcastWeatherUrl = 'api.openweathermap.org/data/2.5/forecast';
+  private forcastWeatherUrl =
+    'https://api.openweathermap.org/data/2.5/forecast';
   private apiKey = environment.openWeatherApiKey;
 
-  //TODO: look into HTTP params to construct the url --> cleaner code.
+  //TODO: Error handling for to many requests
 
   public getLatitudeLongitude(
     city: string,

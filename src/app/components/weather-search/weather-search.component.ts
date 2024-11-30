@@ -11,8 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { map, Observable, startWith } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { Coordinates } from '../interfaces/coordinates';
-import { WeatherApiService } from '../weather-api.service';
+import { Coordinates } from '../../interfaces/coordinates';
+import { WeatherApiService } from '../../services/weather-api.service';
 
 @Component({
   selector: 'app-city-search',

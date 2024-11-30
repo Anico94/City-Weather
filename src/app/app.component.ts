@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CitySearchComponent } from './weather-search/weather-search.component';
+import { CitySearchComponent } from './components/weather-search/weather-search.component';
 
 @Component({
   selector: 'app-root',
