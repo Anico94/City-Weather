@@ -11,8 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { map, Observable, startWith } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { Coordinates } from '../../interfaces/coordinates';
 import { WeatherApiService } from '../../services/weather-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-city-search',
@@ -30,7 +30,7 @@ import { WeatherApiService } from '../../services/weather-api.service';
   styleUrl: './weather-search.component.scss',
 })
 export class CitySearchComponent implements OnInit {
-  constructor(private weatherApi: WeatherApiService) {}
+  constructor(private weatherApi: WeatherApiService, private router: Router) {}
   //Form controls
   public cityNameControl: FormControl = new FormControl('');
   public latitudeControl: FormControl = new FormControl('');
@@ -61,14 +61,7 @@ export class CitySearchComponent implements OnInit {
     );
   }
 
-  public findCoordinates(city: string): void {
-    this.weatherApi
-      .getLatitudeLongitude(city)
-      .subscribe((value) => this.setCoords(value));
-  }
-
-  private setCoords(coords: Coordinates): void {
-    this.latitudeControl.patchValue(coords.latitude);
-    this.longitudeControl.patchValue(coords.longitude);
+  public searchWeather(city: string): void {
+    this.router.navigate(['/weather'], { queryParams: { city } });
   }
 }
