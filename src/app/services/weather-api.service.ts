@@ -12,7 +12,7 @@ export class WeatherApiService {
 
   private geoLocationUrl = 'https://api.openweathermap.org/geo/1.0/direct';
   private currentWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
-  private forcastWeatherUrl =
+  private forecastWeatherUrl =
     'https://api.openweathermap.org/data/2.5/forecast';
   private apiKey = environment.openWeatherApiKey;
 
@@ -46,10 +46,10 @@ export class WeatherApiService {
       .set('lon', longitude)
       .set('appid', this.apiKey);
 
-    return this.http.get<any[]>(this.currentWeatherUrl, { params });
+    return this.http.get<any>(this.currentWeatherUrl, { params });
   }
 
-  public getFiveDayForcast(
+  public getFiveDayForecast(
     latitude: string,
     longitude: string
   ): Observable<any> {
@@ -58,6 +58,6 @@ export class WeatherApiService {
       .set('lon', longitude)
       .set('appid', this.apiKey);
 
-    return this.http.get<any[]>(this.forcastWeatherUrl, { params });
+    return this.http.get<any[]>(this.forecastWeatherUrl, { params });
   }
 }
