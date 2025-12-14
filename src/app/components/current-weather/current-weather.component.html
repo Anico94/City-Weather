@@ -1,0 +1,8 @@
+<div class="current-weather-container">
+  <p>{{ currentWeather?.time }}</p>
+  <p>{{ currentWeather?.temperature }}</p>
+  <p>{{ currentWeather?.typeOfWeather }}</p>
+  @if (currentWeather) {
+  <p>{{ mapIconCodeToImageUrl(currentWeather.icon) }}</p>
+  }
+</div>
