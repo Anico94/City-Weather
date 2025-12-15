@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './forecast-weather.component.html',
-  styleUrl: './forecast-weather.component.scss'
+  styleUrl: './forecast-weather.component.scss',
 })
-export class ForecastWeatherComponent {
-
-}
+export class ForecastWeatherComponent {}

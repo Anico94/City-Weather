@@ -7,8 +7,7 @@ import { ForecastWeather } from '../../interfaces/forecastWeather';
 
 @Component({
   selector: 'app-weather-info',
-  standalone: true,
-  imports: [],
+
   templateUrl: './weather-info.component.html',
   styleUrl: './weather-info.component.scss',
 })

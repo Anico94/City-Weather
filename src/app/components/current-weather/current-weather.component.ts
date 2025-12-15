@@ -4,8 +4,6 @@ import { mapIconCodeToImageURL } from '../../helper/weather-icon-mapper';
 
 @Component({
   selector: 'app-current-weather',
-  standalone: true,
-  imports: [],
   templateUrl: './current-weather.component.html',
   styleUrl: './current-weather.component.scss',
 })
